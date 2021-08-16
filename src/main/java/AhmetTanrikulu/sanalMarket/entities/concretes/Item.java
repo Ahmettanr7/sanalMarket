@@ -1,6 +1,5 @@
 package AhmetTanrikulu.sanalMarket.entities.concretes;
 
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,38 +23,48 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","invoiceDetails"})
-@Table(name = "order_details")
-public class OrderDetail {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","images","orderDetails"})
+@Table(name = "items")
+public class Item {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "order_id")
-	private int orderId;
+	@Column(name = "item_code")
+	private String itemCode;
 	
-	@Column(name = "item_id")
-	private int itemId;
-	
-	@Column(name = "amount")
-	private int amount;
+	@Column(name = "item_name")
+	private String itemName;
 	
 	@Column(name = "unit_price")
-	private double unitPrice;
+	private float unitPrice;
 	
-	@Column(name = "line_total")
-	private double lineTotal;
-
+	@Column(name = "category1")
+	private int category1;
+	
+	@Column(name = "category2")
+	private String category2;
+	
+	@Column(name = "category3")
+	private String category3;
+	
+	@Column(name = "category4")
+	private String category4;
+	
+	@Column(name = "brand")
+	private String brand;
+	
 	@ManyToOne()
-	@JoinColumn(name = "order_id", insertable = false, updatable = false)
-	private Order order;
+	@JoinColumn(name = "category1", insertable = false, updatable = false)
+	private Category1 category;
 	
-	@ManyToOne()
-	@JoinColumn(name = "item_id", insertable = false, updatable = false)
-	private Item item;
-	
-	@OneToMany(mappedBy = "orderDetail")
+	@OneToMany(mappedBy = "item")
 	@JsonIgnore
-	private List<InvoiceDetail> invoiceDetails;
+	private List<Image> images;
+	
+	@OneToMany(mappedBy = "item")
+	@JsonIgnore
+	private List<OrderDetail> orderDetails;
 }

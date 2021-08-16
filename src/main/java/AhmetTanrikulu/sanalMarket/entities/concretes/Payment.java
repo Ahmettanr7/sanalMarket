@@ -1,7 +1,6 @@
 package AhmetTanrikulu.sanalMarket.entities.concretes;
 
-
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","invoiceDetails"})
-@Table(name = "order_details")
-public class OrderDetail {
+@Table(name = "payments")
+public class Payment {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -35,27 +30,23 @@ public class OrderDetail {
 	@Column(name = "order_id")
 	private int orderId;
 	
-	@Column(name = "item_id")
-	private int itemId;
+	@Column(name = "payment_type")
+	private int paymentType;
 	
-	@Column(name = "amount")
-	private int amount;
+	@Column(name = "date_")
+	private LocalDate date;
 	
-	@Column(name = "unit_price")
-	private double unitPrice;
+	@Column(name = "isok")
+	private boolean isOk;
 	
-	@Column(name = "line_total")
-	private double lineTotal;
-
+	@Column(name = "approve_code")
+	private String approveCode;
+	
+	@Column(name = "payment_total")
+	private double paymentTotal;
+	
 	@ManyToOne()
 	@JoinColumn(name = "order_id", insertable = false, updatable = false)
 	private Order order;
-	
-	@ManyToOne()
-	@JoinColumn(name = "item_id", insertable = false, updatable = false)
-	private Item item;
-	
-	@OneToMany(mappedBy = "orderDetail")
-	@JsonIgnore
-	private List<InvoiceDetail> invoiceDetails;
+
 }

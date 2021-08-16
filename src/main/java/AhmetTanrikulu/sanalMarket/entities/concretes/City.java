@@ -1,6 +1,5 @@
 package AhmetTanrikulu.sanalMarket.entities.concretes;
 
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,38 +23,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","invoiceDetails"})
-@Table(name = "order_details")
-public class OrderDetail {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","address","towns"})
+@Table(name = "cities")
+public class City {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "order_id")
-	private int orderId;
+	@Column(name = "country_id")
+	private int countryId;
 	
-	@Column(name = "item_id")
-	private int itemId;
+	@Column(name = "city")
+	private String city;
 	
-	@Column(name = "amount")
-	private int amount;
-	
-	@Column(name = "unit_price")
-	private double unitPrice;
-	
-	@Column(name = "line_total")
-	private double lineTotal;
-
-	@ManyToOne()
-	@JoinColumn(name = "order_id", insertable = false, updatable = false)
-	private Order order;
-	
-	@ManyToOne()
-	@JoinColumn(name = "item_id", insertable = false, updatable = false)
-	private Item item;
-	
-	@OneToMany(mappedBy = "orderDetail")
+	@OneToMany(mappedBy = "city")
 	@JsonIgnore
-	private List<InvoiceDetail> invoiceDetails;
+	private List<Address> address;
+	
+	@OneToMany(mappedBy = "city")
+	@JsonIgnore
+	private List<Town> towns;
+	
+	@ManyToOne()
+	@JoinColumn(name = "country_id", insertable = false, updatable = false)
+	private Country country;
 }
