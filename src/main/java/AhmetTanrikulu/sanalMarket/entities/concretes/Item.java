@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","images","orderDetails"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","images","orderDetails","invoiceDetails"})
 @Table(name = "items")
 public class Item {
 
@@ -56,6 +56,9 @@ public class Item {
 	@Column(name = "brand")
 	private String brand;
 	
+	@Column(name = "image_url")
+	private String imageUrl;
+	
 	@ManyToOne()
 	@JoinColumn(name = "category1", insertable = false, updatable = false)
 	private Category1 category;
@@ -67,4 +70,8 @@ public class Item {
 	@OneToMany(mappedBy = "item")
 	@JsonIgnore
 	private List<OrderDetail> orderDetails;
+	
+	@OneToMany(mappedBy = "item")
+	@JsonIgnore
+	private List<InvoiceDetail> invoiceDetails;
 }

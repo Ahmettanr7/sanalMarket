@@ -26,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","invoiceDetails"})
 @Table(name = "order_details")
+//SerializationException Kontrol et
 public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

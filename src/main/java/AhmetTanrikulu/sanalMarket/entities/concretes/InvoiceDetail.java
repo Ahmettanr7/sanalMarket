@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "invoice_details")
+//SerializationException Kontrol et
 public class InvoiceDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,5 +46,13 @@ public class InvoiceDetail {
 	@ManyToOne()
 	@JoinColumn(name = "order_detail_id", insertable = false, updatable = false)
 	private OrderDetail orderDetail;
+	
+	@ManyToOne()
+	@JoinColumn(name = "invoice_id", insertable = false, updatable = false)
+	private Invoice invoice;
+	
+	@ManyToOne()
+	@JoinColumn(name = "item_id", insertable = false, updatable = false)
+	private Item item;
 
 }

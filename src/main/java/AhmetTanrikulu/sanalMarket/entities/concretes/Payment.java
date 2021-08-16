@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "payments")
+//SerializationException Kontrol et
 public class Payment {
 	
 	@Id
