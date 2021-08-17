@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -34,24 +36,33 @@ public class Address {
 	private int id;
 	
 	@Column(name = "user_id")
+	@NotNull
 	private int userId;
 	
 	@Column(name = "country_id")
+	@NotNull
 	private int countryId;
 	
 	@Column(name = "city_id")
+	@NotNull
 	private int cityId;
 	
 	@Column(name = "town_id")
+	@NotNull
 	private int townId;
 	
 	@Column(name = "district_id")
+	@NotNull
 	private int districtId;
 	
 	@Column(name = "postal_code")
+	@NotNull
+	@NotBlank
 	private String postalCode;
 	
 	@Column(name = "address_text")
+	@NotNull
+	@NotBlank
 	private String addressText;
 	
 	@ManyToOne()

@@ -8,6 +8,7 @@ import AhmetTanrikulu.sanalMarket.business.abstracts.AddressService;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.DataResult;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.Result;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessDataResult;
+import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessResult;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.AddressDao;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Address;
 
@@ -25,8 +26,8 @@ public class AddressManager implements AddressService{
 
 	@Override
 	public Result add(Address address) {
-		// TODO Auto-generated method stub
-		return null;
+		this.addressDao.save(address);
+		return new SuccessResult("Adres ekleme işlemi başarılı");
 	}
 
 	@Override

@@ -65,6 +65,8 @@ public class User {
 	private LocalDate createDate;
 	
 	@Column(name = "telnr1")
+	@NotNull
+	@NotBlank
 	private String telNr1;
 	
 	@Column(name = "telnr2")

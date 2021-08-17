@@ -39,4 +39,9 @@ public class ItemManager implements ItemService{
 		return new SuccessDataResult<List<Item>>(this.itemDao.getCategory1Id(cat1Id),"Kategor1 id sine Göre Getirme İşlemi Başarılı");
 	}
 
+	@Override
+	public DataResult<Item> getById(int id) {
+		return new SuccessDataResult<Item>(this.itemDao.getById(id),"Ürün Getirme İşlemi Başarılı");
+	}
+
 }

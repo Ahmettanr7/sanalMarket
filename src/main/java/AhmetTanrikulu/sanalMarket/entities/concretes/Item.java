@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,15 +35,21 @@ public class Item {
 	private int id;
 	
 	@Column(name = "item_code")
+	@NotNull
+	@NotBlank
 	private String itemCode;
 	
 	@Column(name = "item_name")
+	@NotNull
+	@NotBlank
 	private String itemName;
 	
 	@Column(name = "unit_price")
+	@NotNull
 	private float unitPrice;
 	
 	@Column(name = "category1")
+	@NotNull
 	private int category1;
 	
 	@Column(name = "category2")
@@ -54,6 +62,8 @@ public class Item {
 	private String category4;
 	
 	@Column(name = "brand")
+	@NotNull
+	@NotBlank
 	private String brand;
 	
 	@Column(name = "image_url")

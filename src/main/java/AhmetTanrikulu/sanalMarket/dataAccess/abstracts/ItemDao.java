@@ -11,5 +11,8 @@ public interface ItemDao extends JpaRepository<Item, Integer>{
 	
 	@Query("From Item Where category1 = :cat1Id")
 	List<Item> getCategory1Id(int cat1Id);
+	
+	@Query("From Item Where id = :id")
+	Item getById (int id);
 
 }

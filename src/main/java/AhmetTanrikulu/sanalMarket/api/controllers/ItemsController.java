@@ -52,6 +52,11 @@ public class ItemsController {
 		return this.itemService.getCategory1Id(cat1Id);
 	}
 	
+	@GetMapping("getbyid")
+	public DataResult<Item> getById(int id) {
+		return this.itemService.getById(id);
+	}
+	
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
