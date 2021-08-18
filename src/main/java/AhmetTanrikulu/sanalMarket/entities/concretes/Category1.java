@@ -37,6 +37,9 @@ public class Category1 {
 	@NotBlank
 	private String categoryName;
 	
+	@Column(name = "image_url")
+	private String imageUrl;
+	
 	@OneToMany(mappedBy = "category")
 	@JsonIgnore
 	private List<Item> items;

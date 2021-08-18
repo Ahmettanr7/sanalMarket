@@ -12,8 +12,10 @@ public interface ItemService {
 	
 	Result deleteByItemId(int itemId);
 	
-	DataResult<List<Item>> getCategory1Id(int cat1Id);
+	DataResult<List<Item>> getCategory1Id(int cat1Id, int pageNo, int pageSize);
 	
 	DataResult<Item> getById (int id);
+	
+	DataResult<List<Item>> getAll();
 
 }

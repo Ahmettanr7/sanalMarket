@@ -2,6 +2,9 @@ package AhmetTanrikulu.sanalMarket.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import AhmetTanrikulu.sanalMarket.business.abstracts.ItemService;
@@ -35,8 +38,14 @@ public class ItemManager implements ItemService{
 	}
 
 	@Override
-	public DataResult<List<Item>> getCategory1Id(int cat1Id) {
-		return new SuccessDataResult<List<Item>>(this.itemDao.getCategory1Id(cat1Id),"Kategor1 id sine Göre Getirme İşlemi Başarılı");
+	public DataResult<List<Item>> getCategory1Id(int cat1Id, int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return new SuccessDataResult<List<Item>>(this.itemDao.getCategory1Id(cat1Id,pageable),"Kategor1 id sine Göre Getirme İşlemi Başarılı");
+	}
+	
+	@Override
+	public DataResult<List<Item>> getAll() {
+		return new SuccessDataResult<List<Item>>(this.itemDao.findAll());
 	}
 
 	@Override

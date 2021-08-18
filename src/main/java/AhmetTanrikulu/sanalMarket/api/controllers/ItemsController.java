@@ -47,9 +47,14 @@ public class ItemsController {
 		return ResponseEntity.ok(this.itemService.deleteByItemId(itemId));
 	}
 	
-	@GetMapping("getbycategori")
-	public DataResult<List<Item>> getByCategori(int cat1Id) {
-		return this.itemService.getCategory1Id(cat1Id);
+	@GetMapping("getbycategory")
+	public DataResult<List<Item>> getByCategori(@RequestParam int cat1Id, @RequestParam int pageNo, @RequestParam int pageSize) {
+		return this.itemService.getCategory1Id(cat1Id, pageNo, pageSize);
+	}
+	
+	@GetMapping("getall")
+	public DataResult<List<Item>> getAll() {
+		return this.itemService.getAll();
 	}
 	
 	@GetMapping("getbyid")
