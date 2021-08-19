@@ -52,9 +52,9 @@ public class ItemsController {
 		return this.itemService.getCategory1Id(cat1Id, pageNo, pageSize);
 	}
 	
-	@GetMapping("getall")
-	public DataResult<List<Item>> getAll() {
-		return this.itemService.getAll();
+	@GetMapping("getallcategory1Id")
+	public DataResult<List<Item>> getAllCategory1Id(int cat1Id) {
+		return this.itemService.getAllCategory1Id(cat1Id);
 	}
 	
 	@GetMapping("getbyid")

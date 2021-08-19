@@ -44,8 +44,8 @@ public class ItemManager implements ItemService{
 	}
 	
 	@Override
-	public DataResult<List<Item>> getAll() {
-		return new SuccessDataResult<List<Item>>(this.itemDao.findAll());
+	public DataResult<List<Item>> getAllCategory1Id(int cat1Id) {
+		return new SuccessDataResult<List<Item>>(this.itemDao.getAllCategory1Id(cat1Id));
 	}
 
 	@Override
