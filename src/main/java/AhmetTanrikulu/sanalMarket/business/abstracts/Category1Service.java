@@ -8,5 +8,7 @@ import AhmetTanrikulu.sanalMarket.entities.concretes.Category1;
 public interface Category1Service {
 	
 	DataResult<List<Category1>> getAll();
+	
+	DataResult <Category1> getById(int id);
 
 }

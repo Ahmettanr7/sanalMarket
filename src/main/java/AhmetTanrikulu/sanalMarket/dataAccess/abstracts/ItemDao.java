@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import AhmetTanrikulu.sanalMarket.entities.concretes.Item;
 
 public interface ItemDao extends JpaRepository<Item, Integer>{
@@ -17,5 +19,8 @@ public interface ItemDao extends JpaRepository<Item, Integer>{
 	
 	@Query("From Item Where id = :id")
 	Item getById (int id);
+	
+	@Query("From Item Where itemName LIKE CONCAT('%',:itemName,'%')")
+	List<Item> getByName (@Param("itemName") String itemName);
 
 }

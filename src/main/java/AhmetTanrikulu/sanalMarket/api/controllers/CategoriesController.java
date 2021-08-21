@@ -27,5 +27,10 @@ public class CategoriesController {
 	public DataResult<List<Category1>> getAll(){
 		return this.category1Service.getAll();
 	}
+	
+	@GetMapping("getbyid")
+	public DataResult<Category1> getById(int id){
+		return this.category1Service.getById(id);
+	}
 
 }

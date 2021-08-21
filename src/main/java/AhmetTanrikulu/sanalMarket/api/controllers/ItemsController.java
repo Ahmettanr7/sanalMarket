@@ -62,6 +62,11 @@ public class ItemsController {
 		return this.itemService.getById(id);
 	}
 	
+	@GetMapping("getbyitemname")
+	public DataResult<List<Item>> getByItemName(@RequestParam String itemName) {
+		return this.itemService.getByItemName(itemName);
+	}
+	
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

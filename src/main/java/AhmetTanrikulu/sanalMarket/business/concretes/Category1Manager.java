@@ -23,6 +23,11 @@ public class Category1Manager implements Category1Service{
 	@Override
 	public DataResult<List<Category1>> getAll() {
 		return new SuccessDataResult<List<Category1>>(this.category1Dao.findAll(),"Kategorileri Getirme İşlemi Başarılı");
+	}
+
+	@Override
+	public DataResult<Category1> getById(int id) {
+		return new SuccessDataResult<Category1>(this.category1Dao.getById(id));
 	};
 
 }

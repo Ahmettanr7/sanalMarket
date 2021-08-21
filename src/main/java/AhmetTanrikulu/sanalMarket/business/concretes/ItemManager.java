@@ -20,6 +20,7 @@ public class ItemManager implements ItemService{
 	
 	private ItemDao itemDao;
 
+	@Autowired
 	public ItemManager(ItemDao itemDao) {
 		super();
 		this.itemDao = itemDao;
@@ -51,6 +52,11 @@ public class ItemManager implements ItemService{
 	@Override
 	public DataResult<Item> getById(int id) {
 		return new SuccessDataResult<Item>(this.itemDao.getById(id),"Ürün Getirme İşlemi Başarılı");
+	}
+
+	@Override
+	public DataResult<List<Item>> getByItemName(String itemName) {
+		return new SuccessDataResult<List<Item>>(this.itemDao.getByName(itemName),"'"+itemName+"'"+" arama sonuçları ;");
 	}
 
 }

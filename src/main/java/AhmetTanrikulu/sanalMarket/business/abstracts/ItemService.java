@@ -17,5 +17,7 @@ public interface ItemService {
 	DataResult<Item> getById (int id);
 	
 	DataResult<List<Item>> getAllCategory1Id(int cat1Id);
+	
+	DataResult<List<Item>> getByItemName (String itemName);
 
 }
