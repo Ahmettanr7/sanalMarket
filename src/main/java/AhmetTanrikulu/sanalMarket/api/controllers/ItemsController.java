@@ -67,6 +67,11 @@ public class ItemsController {
 		return this.itemService.getByItemName(itemName);
 	}
 	
+	@GetMapping("getbyitemnamepageable")
+	public DataResult<List<Item>> getByItemNamePageable(@RequestParam String itemName, @RequestParam int pageNo, @RequestParam int pageSize) {
+		return this.itemService.getByItemNamePageable(itemName, pageNo, pageSize);
+	}
+	
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

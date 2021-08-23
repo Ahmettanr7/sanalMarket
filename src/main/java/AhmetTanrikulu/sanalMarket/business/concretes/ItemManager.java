@@ -59,4 +59,10 @@ public class ItemManager implements ItemService{
 		return new SuccessDataResult<List<Item>>(this.itemDao.getByName(itemName),"'"+itemName+"'"+" arama sonuçları ;");
 	}
 
+	@Override
+	public DataResult<List<Item>> getByItemNamePageable(String itemName, int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return new SuccessDataResult<List<Item>>(this.itemDao.getByNamePageable(itemName, pageable));
+	}
+
 }

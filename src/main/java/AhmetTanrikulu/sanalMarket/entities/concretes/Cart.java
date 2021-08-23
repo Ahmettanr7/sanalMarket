@@ -1,6 +1,5 @@
 package AhmetTanrikulu.sanalMarket.entities.concretes;
 
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,8 +38,8 @@ public class Cart {
 	@NotNull
 	private float count;
 	
-	@Column(name = "created_date")
-	private LocalDate createdDate;
+	@Column(name = "cart_status")
+	private boolean cartStatus;
 	
 	@ManyToOne()
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)

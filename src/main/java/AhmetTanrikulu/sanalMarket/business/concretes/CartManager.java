@@ -1,6 +1,5 @@
 package AhmetTanrikulu.sanalMarket.business.concretes;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessDataResult;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessResult;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.CartDao;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Cart;
+import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 
 @Service
 public class CartManager implements CartService{
@@ -26,21 +26,10 @@ public class CartManager implements CartService{
 
 	@Override
 	public Result add(Cart cart) {
-		var result = BusinessRules.run(
-				);
-		if (result != null) {
-			return result;
-		}
-		var cartt = new Cart();
-		var value = this.cartDao.getAllByUserIdAndItemId(cart.getUserId(), cart.getItemId());
-		var newCount = cartt.getCount() + cart.getCount();
-		if ( value != null) {
-			cartt.setCount(newCount);
-		}
-		LocalDate now = LocalDate.now();
-		cart.setCreatedDate(now);
+		
+		cart.setCartStatus(true);
 		this.cartDao.save(cart);
-		return new SuccessResult(cart.getItem().getItemName()+" Sepete Eklendi");
+		return new SuccessResult(cart.getItem().getItemName() + " Sepete eklendi");
 	}
 
 	@Override
@@ -52,6 +41,11 @@ public class CartManager implements CartService{
 	@Override
 	public DataResult<List<Cart>> getAllByUserId(int userId) {
 		return new SuccessDataResult<List<Cart>>(this.cartDao.getAllByUserId(userId));
+	}
+
+	@Override
+	public DataResult<List<CartDto>> getActiveCartItem(int userId) {
+		return new SuccessDataResult<List<CartDto>>(this.cartDao.getActiveCartItem(userId));
 	}
 
 }

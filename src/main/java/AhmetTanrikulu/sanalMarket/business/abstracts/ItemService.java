@@ -19,5 +19,7 @@ public interface ItemService {
 	DataResult<List<Item>> getAllCategory1Id(int cat1Id);
 	
 	DataResult<List<Item>> getByItemName (String itemName);
+	
+	DataResult<List<Item>> getByItemNamePageable (String itemName, int pageNo, int pageSize);
 
 }

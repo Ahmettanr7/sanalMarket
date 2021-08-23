@@ -22,5 +22,8 @@ public interface ItemDao extends JpaRepository<Item, Integer>{
 	
 	@Query("From Item Where itemName LIKE CONCAT('%',:itemName,'%')")
 	List<Item> getByName (@Param("itemName") String itemName);
+	
+	@Query("From Item Where itemName LIKE CONCAT('%',:itemName,'%')")
+	List<Item> getByNamePageable (@Param("itemName") String itemName, Pageable pageable);
 
 }
