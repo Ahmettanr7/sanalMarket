@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -46,13 +48,13 @@ public class CartsController {
 	}
 	
 	@PostMapping("add")
-	public ResponseEntity<?> add(@RequestBody Cart cart) {
+	public ResponseEntity<?> add(@Valid @RequestBody Cart cart) {
 		return ResponseEntity.ok(this.cartService.add(cart));
 	}
 	
 	@PostMapping("delete")
-	public ResponseEntity<?> deleteById(@RequestParam int id) {
-		return ResponseEntity.ok(this.cartService.delete(id));
+	public ResponseEntity<?> deleteById(int userId, int itemId) {
+		return ResponseEntity.ok(this.cartService.delete(userId, itemId));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

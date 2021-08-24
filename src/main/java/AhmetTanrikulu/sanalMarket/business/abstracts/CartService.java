@@ -11,7 +11,7 @@ public interface CartService {
 	
 	Result add (Cart cart);
 	
-	Result delete (int id);
+	Result delete (int userId, int itemId);
 	
 	DataResult<List<Cart>> getAllByUserId (int userId);
 

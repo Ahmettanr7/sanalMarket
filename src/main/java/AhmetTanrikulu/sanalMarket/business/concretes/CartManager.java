@@ -1,5 +1,6 @@
 package AhmetTanrikulu.sanalMarket.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,14 +28,19 @@ public class CartManager implements CartService{
 	@Override
 	public Result add(Cart cart) {
 		
+		var result = BusinessRules.run(
+				);
+		if (result != null) {
+			return result;
+		}
 		cart.setCartStatus(true);
 		this.cartDao.save(cart);
-		return new SuccessResult(cart.getItem().getItemName() + " Sepete eklendi");
+		return new SuccessResult("Sepete eklendi");
 	}
 
 	@Override
-	public Result delete(int id) {
-		this.cartDao.deleteById(id);
+	public Result delete(int userId, int itemId) {
+		this.cartDao.deleteItem(userId, itemId);
 		return new SuccessResult("Sepetten Çıkarma İşlemi Başarılı");
 	}
 

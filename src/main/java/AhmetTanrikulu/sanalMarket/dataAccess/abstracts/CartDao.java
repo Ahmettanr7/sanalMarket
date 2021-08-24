@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import AhmetTanrikulu.sanalMarket.core.utilities.results.Result;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Cart;
 import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 
@@ -24,6 +25,9 @@ public interface CartDao extends JpaRepository<Cart, Integer>{
 			+ "GROUP BY c.userId, c.itemId, i.itemName, i.itemCode, i.unitPrice, i.category1, i.category2, i.category3,"
 			+ " i.category4, i.brand")
 	List<CartDto> getActiveCartItem (@Param("userId") int userId);
+	
+	@Query("DELETE FROM Cart WHERE userId=:userId And itemId=:itemId")
+	void deleteItem (int userId, int itemId);
 	
 	List<Cart> getByUserIdAndItemIdAndCartStatusIsTrue (int userId, int itemId);
 }
