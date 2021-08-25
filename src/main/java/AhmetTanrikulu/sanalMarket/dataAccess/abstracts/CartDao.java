@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import AhmetTanrikulu.sanalMarket.core.utilities.results.Result;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Cart;
 import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 
@@ -14,7 +13,9 @@ public interface CartDao extends JpaRepository<Cart, Integer>{
 	
 	List<Cart> getAllByUserId (int userId);
 	
-	List<Cart> getAllByUserIdAndItemId (int userId, int itemId);
+	List<Cart> getAllByUserIdAndCartStatusIsTrue (int userId);
+	
+	Cart getAllByUserIdAndItemIdAndCartStatusIsTrue (int userId, int itemId);
 	
 	@Query("SELECT New AhmetTanrikulu.sanalMarket.entities.dtos.CartDto"
 			+ " (c.userId, c.itemId, i.itemName, i.itemCode, i.unitPrice, i.category1, i.category2, i.category3, "

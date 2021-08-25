@@ -41,6 +41,12 @@ public class Cart {
 	@Column(name = "cart_status")
 	private boolean cartStatus;
 	
+	@Column(name = "line_total")
+	private float lineTotal;
+	
+	@Column(name = "total_cart_price")
+	private float totalCartPrice;
+	
 	@ManyToOne()
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private User user;

@@ -1,6 +1,5 @@
 package AhmetTanrikulu.sanalMarket.business.concretes;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import AhmetTanrikulu.sanalMarket.core.utilities.results.Result;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessDataResult;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessResult;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.CartDao;
+import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.ItemDao;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Cart;
 import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 
@@ -19,10 +19,12 @@ import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 public class CartManager implements CartService{
 	
 	private CartDao cartDao;
+	private ItemDao itemDao;
 
-	public CartManager(CartDao cartDao) {
+	public CartManager(CartDao cartDao, ItemDao itemDao) {
 		super();
 		this.cartDao = cartDao;
+		this.itemDao = itemDao;
 	}
 
 	@Override
@@ -33,9 +35,27 @@ public class CartManager implements CartService{
 		if (result != null) {
 			return result;
 		}
-		cart.setCartStatus(true);
-		this.cartDao.save(cart);
-		return new SuccessResult("Sepete eklendi");
+		var item = this.cartDao.getAllByUserIdAndItemIdAndCartStatusIsTrue(cart.getUserId(), cart.getItemId());
+		if(item != null) {
+			var findItem = this.itemDao.getById(item.getItemId());
+			var newCount= item.getCount()+cart.getCount();
+			var newLineTotal= newCount*findItem.getUnitPrice();
+//			for (int a = 0; a < 100; a++) {
+//			 var itemm = this.cartDao.getAllByUserIdAndCartStatusIsTrue(cart.getUserId()).get(a);
+//			float newTotalPrice= +itemm.getLineTotal();
+//			item.setTotalCartPrice(newTotalPrice);
+//			}
+			item.setCount(newCount);
+			item.setLineTotal(newLineTotal);
+			this.cartDao.save(item);
+			return new SuccessResult("Sepete eklendi");
+			}
+		
+			cart.setCartStatus(true);
+			cart.setLineTotal(cart.getCount()*itemDao.getById(cart.getItemId()).getUnitPrice());
+			cart.setTotalCartPrice(cart.getLineTotal());
+			this.cartDao.save(cart);
+			return new SuccessResult("Sepete eklendi");
 	}
 
 	@Override
