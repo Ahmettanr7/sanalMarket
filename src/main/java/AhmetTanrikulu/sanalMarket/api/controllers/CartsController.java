@@ -42,9 +42,14 @@ public class CartsController {
 		return this.cartService.getAllByUserId(userId);
 	}
 	
-	@GetMapping("getactivecartitems")
+	@GetMapping("getTotalCartPrice")
 	public DataResult<List<CartDto>> getActiveCartItems(@RequestParam int userId){
-		return this.cartService.getActiveCartItem(userId);
+		return this.cartService.getByUserIdTotalCartPrice(userId);
+	}
+	
+	@GetMapping("getbyuseridandcartstatusistrue")
+	public DataResult<List<Cart>> getByUserIdAndCartStatusIsTrue(@RequestParam int userId){
+		return this.cartService.getAllByUserIdAndCartStatusIsTrue(userId);
 	}
 	
 	@PostMapping("add")
@@ -53,8 +58,29 @@ public class CartsController {
 	}
 	
 	@PostMapping("delete")
-	public ResponseEntity<?> deleteById(int userId, int itemId) {
-		return ResponseEntity.ok(this.cartService.delete(userId, itemId));
+	public ResponseEntity<?> deleteById(int id) {
+		return ResponseEntity.ok(this.cartService.delete(id));
+	}
+	
+	@PostMapping("decreaseAd")
+	public ResponseEntity<?> decreaseAd(int userId, int itemId) {
+		return ResponseEntity.ok(this.cartService.decreaseAd(userId, itemId));
+	}
+	
+	@PostMapping("increaseAd")
+	public ResponseEntity<?> increaseAd(int userId, int itemId) {
+		return ResponseEntity.ok(this.cartService.increaseAd(userId, itemId));
+	}
+	
+	
+	@PostMapping("decreaseKg")
+	public ResponseEntity<?> decreaseKg(int userId, int itemId) {
+		return ResponseEntity.ok(this.cartService.decreaseKg(userId, itemId));
+	}
+	
+	@PostMapping("increaseKg")
+	public ResponseEntity<?> increaseKg(int userId, int itemId) {
+		return ResponseEntity.ok(this.cartService.increaseKg(userId, itemId));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

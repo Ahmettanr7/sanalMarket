@@ -46,7 +46,7 @@ public class Item {
 	
 	@Column(name = "unit_price")
 	@NotNull
-	private float unitPrice;
+	private double unitPrice;
 	
 	@Column(name = "category1")
 	@NotNull

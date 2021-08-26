@@ -40,27 +40,22 @@ public class CartManager implements CartService{
 			var findItem = this.itemDao.getById(item.getItemId());
 			var newCount= item.getCount()+cart.getCount();
 			var newLineTotal= newCount*findItem.getUnitPrice();
-//			for (int a = 0; a < 100; a++) {
-//			 var itemm = this.cartDao.getAllByUserIdAndCartStatusIsTrue(cart.getUserId()).get(a);
-//			float newTotalPrice= +itemm.getLineTotal();
-//			item.setTotalCartPrice(newTotalPrice);
-//			}
 			item.setCount(newCount);
 			item.setLineTotal(newLineTotal);
 			this.cartDao.save(item);
 			return new SuccessResult("Sepete eklendi");
 			}
-		
+			var newLineTotal = cart.getCount()*itemDao.getById(cart.getItemId()).getUnitPrice();
 			cart.setCartStatus(true);
-			cart.setLineTotal(cart.getCount()*itemDao.getById(cart.getItemId()).getUnitPrice());
+			cart.setLineTotal(newLineTotal);
 			cart.setTotalCartPrice(cart.getLineTotal());
 			this.cartDao.save(cart);
 			return new SuccessResult("Sepete eklendi");
 	}
 
 	@Override
-	public Result delete(int userId, int itemId) {
-		this.cartDao.deleteItem(userId, itemId);
+	public Result delete(int id) {
+		this.cartDao.deleteById(id);
 		return new SuccessResult("Sepetten Çıkarma İşlemi Başarılı");
 	}
 
@@ -70,8 +65,57 @@ public class CartManager implements CartService{
 	}
 
 	@Override
-	public DataResult<List<CartDto>> getActiveCartItem(int userId) {
-		return new SuccessDataResult<List<CartDto>>(this.cartDao.getActiveCartItem(userId));
+	public DataResult<List<CartDto>> getByUserIdTotalCartPrice(int userId) {
+		return new SuccessDataResult<List<CartDto>>(this.cartDao.getByUserIdTotalCartPrice(userId));
+	}
+
+	@Override
+	public DataResult<List<Cart>> getAllByUserIdAndCartStatusIsTrue(int userId) {
+		return new SuccessDataResult<List<Cart>>(this.cartDao.getAllByUserIdAndCartStatusIsTrue(userId));
+	}
+
+	@Override
+	public Result decreaseAd(int userId, int itemId) {
+		var item = this.cartDao.getAllByUserIdAndItemIdAndCartStatusIsTrue(userId, itemId);
+		var newCount= item.getCount()-1;
+		var unitPrice = this.itemDao.getById(itemId).getUnitPrice();
+		item.setCount(newCount);
+		item.setLineTotal(newCount*unitPrice);
+		this.cartDao.save(item);
+		return new SuccessResult("Miktar güncellendi");
+	}
+
+	@Override
+	public Result increaseAd(int userId, int itemId) {
+		var item = this.cartDao.getAllByUserIdAndItemIdAndCartStatusIsTrue(userId, itemId);
+		var newCount= item.getCount()+1;
+		var unitPrice = this.itemDao.getById(itemId).getUnitPrice();
+		item.setCount(newCount);
+		item.setLineTotal(newCount*unitPrice);
+		this.cartDao.save(item);
+		return new SuccessResult("Miktar güncellendi");
+	}
+
+	@Override
+	public Result decreaseKg(int userId, int itemId) {
+		var item = this.cartDao.getAllByUserIdAndItemIdAndCartStatusIsTrue(userId, itemId);
+		var newCount= item.getCount()-0.5;
+		var unitPrice = this.itemDao.getById(itemId).getUnitPrice();
+		item.setCount(newCount);
+		item.setLineTotal(newCount*unitPrice);
+		this.cartDao.save(item);
+		return new SuccessResult("Miktar güncellendi");
+	}
+
+	@Override
+	public Result increaseKg(int userId, int itemId) {
+		var item = this.cartDao.getAllByUserIdAndItemIdAndCartStatusIsTrue(userId, itemId);
+		var newCount= item.getCount()+0.5;
+		var unitPrice = this.itemDao.getById(itemId).getUnitPrice();
+		item.setCount(newCount);
+		item.setLineTotal(newCount*unitPrice);
+		this.cartDao.save(item);
+		return new SuccessResult("Miktar güncellendi");
 	}
 
 }

@@ -36,16 +36,16 @@ public class Cart {
 	
 	@Column(name = "count")
 	@NotNull
-	private float count;
+	private double count;
 	
 	@Column(name = "cart_status")
 	private boolean cartStatus;
 	
 	@Column(name = "line_total")
-	private float lineTotal;
+	private double lineTotal;
 	
 	@Column(name = "total_cart_price")
-	private float totalCartPrice;
+	private double totalCartPrice;
 	
 	@ManyToOne()
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)

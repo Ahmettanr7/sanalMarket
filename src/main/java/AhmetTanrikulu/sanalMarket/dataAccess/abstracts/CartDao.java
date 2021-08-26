@@ -18,17 +18,12 @@ public interface CartDao extends JpaRepository<Cart, Integer>{
 	Cart getAllByUserIdAndItemIdAndCartStatusIsTrue (int userId, int itemId);
 	
 	@Query("SELECT New AhmetTanrikulu.sanalMarket.entities.dtos.CartDto"
-			+ " (c.userId, c.itemId, i.itemName, i.itemCode, i.unitPrice, i.category1, i.category2, i.category3, "
-			+ "i.category4, i.brand,"
-			+ "SUM(c.count) as count)"
+			+ " (c.userId,"
+			+ "SUM(c.lineTotal) as count)"
 			+ " FROM Item i Inner Join i.carts c "
 			+ "WHERE c.userId=:userId And c.cartStatus=1 "
-			+ "GROUP BY c.userId, c.itemId, i.itemName, i.itemCode, i.unitPrice, i.category1, i.category2, i.category3,"
-			+ " i.category4, i.brand")
-	List<CartDto> getActiveCartItem (@Param("userId") int userId);
-	
-	@Query("DELETE FROM Cart WHERE userId=:userId And itemId=:itemId")
-	void deleteItem (int userId, int itemId);
+			+ "GROUP BY c.userId")
+	List<CartDto> getByUserIdTotalCartPrice (@Param("userId") int userId);
 	
 	List<Cart> getByUserIdAndItemIdAndCartStatusIsTrue (int userId, int itemId);
 }

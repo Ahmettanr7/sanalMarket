@@ -11,9 +11,16 @@ public interface CartService {
 	
 	Result add (Cart cart);
 	
-	Result delete (int userId, int itemId);
+	Result delete (int id);
+	
+	Result decreaseAd (int userId, int itemId);
+	Result increaseAd (int userId, int itemId);
+	Result decreaseKg (int userId, int itemId);
+	Result increaseKg (int userId, int itemId);
 	
 	DataResult<List<Cart>> getAllByUserId (int userId);
 
-	DataResult<List<CartDto>> getActiveCartItem (int userId);
+	DataResult<List<CartDto>> getByUserIdTotalCartPrice (int userId);
+	
+	DataResult<List<Cart>> getAllByUserIdAndCartStatusIsTrue (int userId);
 }
