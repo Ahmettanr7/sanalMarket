@@ -43,7 +43,7 @@ public class CartsController {
 	}
 	
 	@GetMapping("getTotalCartPrice")
-	public DataResult<List<CartDto>> getActiveCartItems(@RequestParam int userId){
+	public DataResult<CartDto> getActiveCartItems(@RequestParam int userId){
 		return this.cartService.getByUserIdTotalCartPrice(userId);
 	}
 	

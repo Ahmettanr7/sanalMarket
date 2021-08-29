@@ -31,9 +31,6 @@ public class Payment {
 	@Column(name = "order_id")
 	private int orderId;
 	
-	@Column(name = "payment_type")
-	private int paymentType;
-	
 	@Column(name = "date_")
 	private LocalDate date;
 	

@@ -20,7 +20,7 @@ public interface CartService {
 	
 	DataResult<List<Cart>> getAllByUserId (int userId);
 
-	DataResult<List<CartDto>> getByUserIdTotalCartPrice (int userId);
+	DataResult<CartDto> getByUserIdTotalCartPrice (int userId);
 	
 	DataResult<List<Cart>> getAllByUserIdAndCartStatusIsTrue (int userId);
 }

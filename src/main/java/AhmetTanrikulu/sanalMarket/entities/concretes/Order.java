@@ -12,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","orderDetails","payments","invoices"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","payments"})
 @Table(name = "orders")
 //SerializationException Kontrol et
 public class Order {
@@ -36,19 +35,18 @@ public class Order {
 	private int id;
 	
 	@Column(name = "user_id")
+	@NotNull
 	private int userId;
+	
+	@Column(name = "address_id")
+	@NotNull
+	private int addressId;
 	
 	@Column(name = "date_")
 	private LocalDate date;
 	
 	@Column(name = "total_price")
 	private double totalPrice;
-	
-	@Column(name = "status_")
-	private TinyIntTypeDescriptor status;
-	
-	@Column(name = "address_id")
-	private int addressId;
 	
 	@ManyToOne()
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -60,14 +58,6 @@ public class Order {
 	
 	@OneToMany(mappedBy = "order")
 	@JsonIgnore
-	private List<OrderDetail> orderDetails;
-	
-	@OneToMany(mappedBy = "order")
-	@JsonIgnore
 	private List<Payment> payments;
-	
-	@OneToMany(mappedBy = "order")
-	@JsonIgnore
-	private List<Invoice> invoices;
 
 }

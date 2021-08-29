@@ -23,7 +23,7 @@ public interface CartDao extends JpaRepository<Cart, Integer>{
 			+ " FROM Item i Inner Join i.carts c "
 			+ "WHERE c.userId=:userId And c.cartStatus=1 "
 			+ "GROUP BY c.userId")
-	List<CartDto> getByUserIdTotalCartPrice (@Param("userId") int userId);
+	CartDto getByUserIdTotalCartPrice (@Param("userId") int userId);
 	
 	List<Cart> getByUserIdAndItemIdAndCartStatusIsTrue (int userId, int itemId);
 }

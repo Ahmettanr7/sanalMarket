@@ -65,8 +65,8 @@ public class CartManager implements CartService{
 	}
 
 	@Override
-	public DataResult<List<CartDto>> getByUserIdTotalCartPrice(int userId) {
-		return new SuccessDataResult<List<CartDto>>(this.cartDao.getByUserIdTotalCartPrice(userId));
+	public DataResult<CartDto> getByUserIdTotalCartPrice(int userId) {
+		return new SuccessDataResult<CartDto>(this.cartDao.getByUserIdTotalCartPrice(userId));
 	}
 
 	@Override
