@@ -10,7 +10,7 @@ public interface ItemService {
 	
 	Result add(Item item);
 	
-	Result deleteByItemId(int itemId);
+	Result delete(int id);
 	
 	DataResult<List<Item>> getCategory1Id(int cat1Id, int pageNo, int pageSize);
 	

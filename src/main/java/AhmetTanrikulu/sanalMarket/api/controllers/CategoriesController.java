@@ -2,8 +2,13 @@ package AhmetTanrikulu.sanalMarket.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +26,16 @@ public class CategoriesController {
 	public CategoriesController(Category1Service category1Service) {
 		super();
 		this.category1Service = category1Service;
+	}
+	
+	@PostMapping("add")
+	public ResponseEntity<?> add(@Valid @RequestBody Category1 category1) {
+		return ResponseEntity.ok(this.category1Service.add(category1));
+	}
+	
+	@PostMapping("delete")
+	public ResponseEntity<?> deleteById(int id) {
+		return ResponseEntity.ok(this.category1Service.delete(id));
 	}
 	
 	@GetMapping("getall")

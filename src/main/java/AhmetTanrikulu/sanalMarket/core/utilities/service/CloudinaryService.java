@@ -7,12 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
+import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessResult;
+
 @Service
+@CrossOrigin
 public class CloudinaryService {
 
 	Cloudinary cloudinary;

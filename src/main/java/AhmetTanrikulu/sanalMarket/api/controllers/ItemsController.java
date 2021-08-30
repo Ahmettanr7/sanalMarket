@@ -43,8 +43,8 @@ public class ItemsController {
 	}
 	
 	@PostMapping("delete")
-	public ResponseEntity<?> deleteByEducationId(@RequestParam int itemId) {
-		return ResponseEntity.ok(this.itemService.deleteByItemId(itemId));
+	public ResponseEntity<?> deleteByEducationId(int id) {
+		return ResponseEntity.ok(this.itemService.delete(id));
 	}
 	
 	@GetMapping("getbycategory")

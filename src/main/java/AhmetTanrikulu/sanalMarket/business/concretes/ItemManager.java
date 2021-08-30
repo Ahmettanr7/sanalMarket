@@ -29,12 +29,12 @@ public class ItemManager implements ItemService{
 	@Override
 	public Result add(Item item) {
 		this.itemDao.save(item);
-		return new SuccessResult("Ürün Ekleme İşlemi Başarılı");
+		return new SuccessResult("Ürün Ekleme İşlemi Başarılı"+"  Ürün ID : "+item.getId());
 	}
 
 	@Override
-	public Result deleteByItemId(int itemId) {
-		this.itemDao.deleteById(itemId);
+	public Result delete(int id) {
+		this.itemDao.deleteById(id);
 		return new SuccessResult("Silme İşlemi Başarılı");
 	}
 

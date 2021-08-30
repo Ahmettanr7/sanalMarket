@@ -38,14 +38,14 @@ public class ImagesController {
 		this.imageService = imageService;
 	}
 	
-	@GetMapping("getAll")
+	@GetMapping("/getAll")
 	public ResponseEntity<List<Image>> getAll(){
 		
 		List<Image> list  = this.imageService.getAll().getData();
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
-	@GetMapping("getbyitem")
+	@GetMapping("/getbyitem")
 	public DataResult<List<Image>> getByItem (int itemId){
 		
 		return this.imageService.getByItemId(itemId);
