@@ -36,8 +36,8 @@ public class Image {
 	@Column(name = "item_id")
 	private int itemId;
 	
-	@ManyToOne()
-	@JoinColumn(name = "item_id", insertable = false, updatable = false)
-	private Item item;
+//	@ManyToOne()
+//	@JoinColumn(name = "item_id", insertable = false, updatable = false)
+//	private Item item;
 
 }

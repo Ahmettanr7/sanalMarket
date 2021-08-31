@@ -12,7 +12,9 @@ import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessDataResult;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessResult;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.CartDao;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.OrderDao;
+import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.OrderDetailDao;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Order;
+import AhmetTanrikulu.sanalMarket.entities.concretes.OrderDetail;
 import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 
 @Service
@@ -20,11 +22,13 @@ public class OrderManager implements OrderService{
 	
 	private OrderDao orderDao;
 	private CartDao cartDao;
+	private OrderDetailDao orderDetailDao;
  
-	public OrderManager(OrderDao orderDao, CartDao cartDao) {
+	public OrderManager(OrderDao orderDao, CartDao cartDao, OrderDetailDao orderDetailDao) {
 		super();
 		this.orderDao = orderDao;
 		this.cartDao = cartDao;
+		this.orderDetailDao = orderDetailDao;
 	}
 
 	@Override
@@ -43,11 +47,21 @@ public class OrderManager implements OrderService{
 		this.orderDao.save(order);
 		
 		var cartItems= this.cartDao.getAllByUserIdAndCartStatusIsTrue(order.getUserId());
-		
+		for (int i = 0; i < cartItems.stream().count() ; i++) {
+			OrderDetail orderDetail = new OrderDetail();
+			var item = cartItems.get(i).getItemId();
+			orderDetail.setItemId(item);
+			orderDetail.setOrderId(order.getId());
+			orderDetail.setCount(cartItems.get(i).getCount());
+			this.orderDetailDao.save(orderDetail);
+		}
 		for (int i = 0; i < cartItems.stream().count() ; i++) {
 			cartItems.get(i).setCartStatus(false);
 			this.cartDao.save(cartItems.get(i));
 		}
+		
+		
+		
 		
 		return new SuccessResult("Siparişiniz alındı.");
 		

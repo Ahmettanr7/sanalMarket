@@ -25,9 +25,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","payments"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","singleInformations","payments","orderDetails"})
 @Table(name = "orders")
-//SerializationException Kontrol et
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,5 +61,9 @@ public class Order {
 	@OneToMany(mappedBy = "order")
 	@JsonIgnore
 	private List<Payment> payments;
+	
+	@OneToMany(mappedBy = "order")
+	@JsonIgnore
+	private List<OrderDetail> orderDetails;
 
 }

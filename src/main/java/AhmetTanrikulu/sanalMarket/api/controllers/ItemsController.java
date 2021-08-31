@@ -43,7 +43,7 @@ public class ItemsController {
 	}
 	
 	@PostMapping("delete")
-	public ResponseEntity<?> deleteByEducationId(int id) {
+	public ResponseEntity<?> delete(int id) {
 		return ResponseEntity.ok(this.itemService.delete(id));
 	}
 	
