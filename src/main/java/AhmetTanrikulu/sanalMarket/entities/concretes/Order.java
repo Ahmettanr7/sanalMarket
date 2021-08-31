@@ -48,6 +48,9 @@ public class Order {
 	@Column(name = "total_price")
 	private double totalPrice;
 	
+	@Column(name = "is_delivered")
+	private boolean isDelivered;
+	
 	@ManyToOne()
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private User user;

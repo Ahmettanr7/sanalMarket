@@ -41,7 +41,7 @@ public class Category1Manager implements Category1Service{
 	@Override
 	public Result delete(int id) {
 		this.category1Dao.deleteById(id);
-		return new SuccessResult("Sepetten Çıkarma İşlemi Başarılı");
+		return new SuccessResult("Kategori silme işlemi başarılı");
 	};
 
 }

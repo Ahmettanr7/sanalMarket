@@ -1,7 +1,6 @@
 package AhmetTanrikulu.sanalMarket.business.concretes;
 
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessDataResult;
 import AhmetTanrikulu.sanalMarket.core.utilities.results.SuccessResult;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.CartDao;
 import AhmetTanrikulu.sanalMarket.dataAccess.abstracts.OrderDao;
-import AhmetTanrikulu.sanalMarket.entities.concretes.Cart;
 import AhmetTanrikulu.sanalMarket.entities.concretes.Order;
 import AhmetTanrikulu.sanalMarket.entities.dtos.CartDto;
 
@@ -41,6 +39,7 @@ public class OrderManager implements OrderService{
 		
 		order.setDate(now);
 		order.setTotalPrice(cart.getTotalCartPrice());
+		order.setDelivered(false);
 		this.orderDao.save(order);
 		
 		var cartItems= this.cartDao.getAllByUserIdAndCartStatusIsTrue(order.getUserId());
@@ -53,6 +52,29 @@ public class OrderManager implements OrderService{
 		return new SuccessResult("Siparişiniz alındı.");
 		
 		
+	}
+
+	@Override
+	public DataResult<List<Order>> getByIsDeliveredIsTrue() {
+		return new SuccessDataResult<List<Order>>(this.orderDao.getByIsDeliveredIsTrueOrderByDateDesc());
+	}
+
+	@Override
+	public DataResult<List<Order>> getByIsDeliveredIsFalse() {
+		return new SuccessDataResult<List<Order>>(this.orderDao.getByIsDeliveredIsFalse());
+	}
+
+	@Override
+	public DataResult<Order> getById(int id) {
+		return new SuccessDataResult<Order>(this.orderDao.getById(id));
+	}
+
+	@Override
+	public Result wasDelivered(int id) {
+		Order order = this.orderDao.getById(id);
+		order.setDelivered(true);
+		this.orderDao.save(order);
+		return new SuccessResult("Siparişin teslim edildiği kaydedildi.");
 	}
 
 }

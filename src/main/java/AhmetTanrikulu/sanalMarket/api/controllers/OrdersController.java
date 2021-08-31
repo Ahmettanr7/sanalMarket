@@ -33,8 +33,28 @@ public class OrdersController {
 		return ResponseEntity.ok(this.orderService.add(order));
 	}
 	
+	@PostMapping("wasdelivered")
+	public ResponseEntity<?> wasDelivered(int id) {
+		return ResponseEntity.ok(this.orderService.wasDelivered(id));
+	}
+	
 	@GetMapping("getbyuserid")
 	public DataResult<List<Order>> getByUserId(int userId) {
 		return this.orderService.getByUserId(userId);
+	}
+	
+	@GetMapping("getbyisdeliveredistrue")
+	public DataResult<List<Order>> getByIsDeliveredIsTrue() {
+		return this.orderService.getByIsDeliveredIsTrue();
+	}
+	
+	@GetMapping("getbyisdeliveredisfalse")
+	public DataResult<List<Order>> getByIsDeliveredIsFalse() {
+		return this.orderService.getByIsDeliveredIsFalse();
+	}
+	
+	@GetMapping("getbyid")
+	public DataResult<Order> getById(int id) {
+		return this.orderService.getById(id);
 	}
 }

@@ -10,6 +10,14 @@ public interface OrderService {
 	
 	Result add(Order order);
 	
+	Result wasDelivered(int id);
+	
+	DataResult<Order> getById(int id);
+	
 	DataResult<List<Order>> getByUserId (int userId);
+	
+	DataResult<List<Order>> getByIsDeliveredIsTrue();
+	
+	DataResult<List<Order>> getByIsDeliveredIsFalse();
 
 }
